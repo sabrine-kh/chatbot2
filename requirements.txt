@@ -1,0 +1,7 @@
+streamlit==1.34.0
+supabase==2.9.0
+sentence-transformers==3.2.1
+torch==2.4.1
+groq==0.11.0
+nltk==3.9.1          # only if you really need it
+s
