@@ -1,7 +1,9 @@
-streamlit==1.34.0
-supabase==2.9.0
-sentence-transformers==3.2.1
-torch==2.4.1
-groq==0.11.0
-nltk==3.9.1          # only if you really need it
-s
+streamlit>=1.34,<2
+supabase>=2.9,<3
+sentence-transformers>=3.2,<4
+groq>=0.10,<1
+python-dotenv>=1.0,<2      # only if you load .env locally
+# torch pulled in automatically by sentence-transformers;
+# if you need to pin, use the CPU wheel line below:
+# torch==2.3.0+cpu --extra-index-url https://download.pytorch.org/whl/cpu
+nltk>=3.9,<4               # optional
