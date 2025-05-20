@@ -4,12 +4,19 @@ from supabase import create_client, Client
 from sentence_transformers import SentenceTransformer
 from groq import Groq
 
-# ──────────────────────────────────────────────────────
-# 1.   CONFIG & SECRETS
-# ──────────────────────────────────────────────────────
-SUPABASE_URL         = os.getenv("SUPABASE_URL")
-SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_KEY")
-GROQ_API_KEY         = os.getenv("GROQ_API_KEY")
+import os, streamlit as st
+from dotenv import load_dotenv       # optional, for local dev
+
+load_dotenv(override=False)          # pulls .env into os.environ when you run locally
+
+def _get_secret(name: str) -> str | None:
+    """Look in Streamlit-Cloud secrets first, then in OS env vars."""
+    return st.secrets.get(name) or os.getenv(name)
+
+SUPABASE_URL         = _get_secret("SUPABASE_URL")
+SUPABASE_SERVICE_KEY = _get_secret("SUPABASE_SERVICE_KEY")
+GROQ_API_KEY         = _get_secret("GROQ_API_KEY")
+
 
 if not all([SUPABASE_URL, SUPABASE_SERVICE_KEY, GROQ_API_KEY]):
     st.error("Missing environment variables! Set them locally in .env "
